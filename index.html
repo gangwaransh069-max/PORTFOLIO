@@ -1,0 +1,1685 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ANSH GANGWAR // Personal Archive & Dossier</title>
+
+  <!-- Google Fonts: Playfair Display (Vintage Editorial), Space Grotesk, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,500;1,700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['Playfair Display', 'Georgia', 'serif'],
+            sans: ['Space Grotesk', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    /* ==================== VINTAGE COLOR TOKENS ==================== */
+    :root {
+      --bg-base: #12100e;
+      --bg-surface: rgba(28, 24, 20, 0.84);
+      --bg-elevated: #231e19;
+      --border-brass: rgba(212, 163, 89, 0.28);
+      --border-strong: rgba(212, 163, 89, 0.6);
+      --accent-brass: #d4a359;
+      --accent-amber: #e09f3e;
+      --accent-crimson: #9e2a2b;
+      --accent-emerald: #386641;
+      --text-primary: #f3ead8;
+      --text-secondary: #b8aa96;
+      --glow-color: rgba(212, 163, 89, 0.22);
+      --grain-opacity: 0.045;
+    }
+
+    /* Warm Aged Parchment Mode */
+    html.parchment-mode {
+      --bg-base: #efe6d5;
+      --bg-surface: rgba(247, 240, 226, 0.88);
+      --bg-elevated: #e5d8c0;
+      --border-brass: rgba(120, 79, 34, 0.28);
+      --border-strong: rgba(120, 79, 34, 0.65);
+      --accent-brass: #8c5319;
+      --accent-amber: #a8641d;
+      --accent-crimson: #8b1e24;
+      --accent-emerald: #2d5a36;
+      --text-primary: #1f1914;
+      --text-secondary: #574a3c;
+      --glow-color: rgba(140, 83, 25, 0.16);
+      --grain-opacity: 0.06;
+    }
+
+    /* Candlelight Abyssal Focus Mode */
+    html.candle-mode {
+      --bg-base: #070605;
+      --bg-surface: rgba(14, 11, 9, 0.92);
+      --bg-elevated: #16110d;
+      --border-brass: rgba(224, 159, 62, 0.35);
+      --accent-brass: #f0b354;
+      --glow-color: rgba(240, 179, 84, 0.3);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: var(--bg-base);
+      color: var(--text-primary);
+      font-family: 'Space Grotesk', sans-serif;
+      transition: background-color 0.45s ease, color 0.45s ease;
+      overflow-x: hidden;
+    }
+
+    /* Subtle Vintage Paper Grain & CRT Scanline Overlay */
+    .vintage-grain {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 45;
+      opacity: var(--grain-opacity);
+      background-image: radial-gradient(rgba(212, 163, 89, 0.45) 1px, transparent 0),
+                        repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.22) 0px, rgba(0, 0, 0, 0.22) 1px, transparent 1px, transparent 3px);
+      background-size: 24px 24px, 100% 3px;
+    }
+
+    /* Vintage Double-Ruled Brass Card */
+    .vintage-card {
+      background: var(--bg-surface);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border-brass);
+      box-shadow: 0 14px 36px -12px rgba(0, 0, 0, 0.55), inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+      transition: transform 0.25s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .vintage-card:hover {
+      border-color: var(--border-strong);
+      box-shadow: 0 18px 42px -10px var(--glow-color), inset 0 0 0 1px rgba(212, 163, 89, 0.12);
+    }
+
+    /* Tactile Brass Stamp Button */
+    .brass-btn {
+      background: linear-gradient(135deg, var(--accent-brass) 0%, var(--accent-amber) 100%);
+      color: #14100c;
+      font-weight: 700;
+      border: 1px solid rgba(255, 240, 200, 0.35);
+      box-shadow: 0 6px 20px -4px var(--glow-color), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+      transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+    }
+
+    .brass-btn:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.06);
+      box-shadow: 0 10px 26px -4px var(--glow-color);
+    }
+
+    .brass-btn:active {
+      transform: translateY(1px) scale(0.98);
+    }
+
+    /* Crimson Wax Seal Badge */
+    .wax-seal {
+      background: radial-gradient(circle at 35% 30%, #c13b3d, #7a191b 75%, #4d0d0e 100%);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.55), inset 0 2px 4px rgba(255, 255, 255, 0.25), inset 0 -3px 6px rgba(0, 0, 0, 0.5);
+      border: 2px dashed rgba(243, 234, 216, 0.35);
+    }
+
+    /* 3D Dossier Flip Card */
+    .flip-perspective {
+      perspective: 1200px;
+    }
+    .flip-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .flip-inner.is-flipped {
+      transform: rotateY(180deg);
+    }
+    .flip-face {
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+    .flip-back {
+      transform: rotateY(180deg);
+    }
+
+    /* 3D Tilt Card */
+    .tilt-card {
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
+
+    /* Typewriter Caret */
+    @keyframes blinkCaret {
+      0%, 49% { opacity: 1; }
+      50%, 100% { opacity: 0; }
+    }
+    .caret-blink {
+      animation: blinkCaret 0.95s infinite;
+    }
+
+    /* Stamp Impact Animation */
+    @keyframes stampDrop {
+      0% { transform: scale(1.6) rotate(-14deg); opacity: 0; }
+      65% { transform: scale(0.95) rotate(-5deg); opacity: 1; }
+      100% { transform: scale(1) rotate(-6deg); opacity: 1; }
+    }
+    .animate-stamp {
+      animation: stampDrop 0.38s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-base);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--border-brass);
+      border-radius: 999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--accent-brass);
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-amber-600/30">
+
+  <!-- Subtle Paper Grain & Retro Scanlines -->
+  <div class="vintage-grain"></div>
+
+  <!-- Ambient Dust Motes & Constellation Canvas -->
+  <canvas id="ambient-canvas" class="fixed inset-0 w-full h-full pointer-events-none z-0"></canvas>
+
+  <!-- Toast Notification Stack -->
+  <div id="toast-stack" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+  <!-- ==================== 1. VINTAGE BRASS & ANALOG NAVIGATION ==================== -->
+  <header class="sticky top-0 z-40 border-b backdrop-blur-xl transition-colors" style="border-color: var(--border-brass); background: var(--bg-surface);">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-3">
+      
+      <!-- Brand Monogram -->
+      <a href="#top" onclick="playClickSound()" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl wax-seal flex items-center justify-center font-serif font-extrabold text-amber-100 text-lg tracking-wider">
+          AG
+        </div>
+        <div>
+          <div class="font-serif font-bold text-base sm:text-lg tracking-wide leading-none" style="color: var(--text-primary);">
+            ANSH GANGWAR
+          </div>
+          <div class="font-mono text-[10px] tracking-[0.22em] uppercase mt-1" style="color: var(--accent-brass);">
+            EST. BAREILLY • ARCHIVE
+          </div>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden lg:flex items-center gap-1 px-2 py-1.5 rounded-full border" style="border-color: var(--border-brass); background: rgba(0,0,0,0.18);">
+        <a href="#dossier" onclick="playClickSound()" class="px-3.5 py-1.5 rounded-full font-mono text-xs uppercase tracking-wider hover:bg-amber-500/15 transition-colors">Dossier</a>
+        <a href="#philosophy" onclick="playClickSound()" class="px-3.5 py-1.5 rounded-full font-mono text-xs uppercase tracking-wider hover:bg-amber-500/15 transition-colors">Philosophy</a>
+        <a href="#workshop" onclick="playClickSound()" class="px-3.5 py-1.5 rounded-full font-mono text-xs uppercase tracking-wider hover:bg-amber-500/15 transition-colors">Workshop</a>
+        <a href="#arcade" onclick="playClickSound()" class="px-3.5 py-1.5 rounded-full font-mono text-xs uppercase tracking-wider hover:bg-amber-500/15 transition-colors">Parlor Arcade</a>
+        <a href="#telegraph" onclick="playClickSound()" class="px-3.5 py-1.5 rounded-full font-mono text-xs uppercase tracking-wider hover:bg-amber-500/15 transition-colors">Telegraph</a>
+      </nav>
+
+      <!-- Tactile Controls: Mechanical Audio Toggle, Paper/Dark Switch, Mobile Menu -->
+      <div class="flex items-center gap-2 sm:gap-2.5">
+        <!-- Mechanical Typewriter Sound Toggle -->
+        <button id="audio-toggle-btn" onclick="toggleSoundEngine()" class="px-3 py-2 rounded-xl vintage-card font-mono text-xs flex items-center gap-1.5 cursor-pointer" title="Toggle Mechanical Typewriter Audio">
+          <span id="audio-dot" class="w-2 h-2 rounded-full bg-stone-500"></span>
+          <span id="audio-label" class="hidden sm:inline">SFX: OFF</span>
+          <span class="sm:hidden">SFX</span>
+        </button>
+
+        <!-- Vintage Paper vs Dark Study Toggle -->
+        <button id="paper-toggle-btn" onclick="toggleParchmentMode()" class="px-3 py-2 rounded-xl vintage-card font-mono text-xs flex items-center gap-1.5 cursor-pointer" title="Switch Between Dark Study & Aged Parchment">
+          <span id="theme-icon">📜</span>
+          <span id="theme-label" class="hidden sm:inline">Parchment</span>
+        </button>
+
+        <!-- Mobile Menu Button -->
+        <button onclick="toggleMobileDrawer()" aria-label="Open Navigation" class="lg:hidden p-2.5 rounded-xl vintage-card cursor-pointer">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-drawer" class="hidden lg:hidden px-4 pb-5 pt-2 border-t" style="border-color: var(--border-brass); background: var(--bg-surface);">
+      <div class="grid grid-cols-2 gap-2 font-mono text-xs uppercase">
+        <a href="#dossier" onclick="toggleMobileDrawer(); playClickSound()" class="p-3 rounded-xl vintage-card text-center">01. Dossier</a>
+        <a href="#philosophy" onclick="toggleMobileDrawer(); playClickSound()" class="p-3 rounded-xl vintage-card text-center">02. Philosophy</a>
+        <a href="#workshop" onclick="toggleMobileDrawer(); playClickSound()" class="p-3 rounded-xl vintage-card text-center">03. Workshop</a>
+        <a href="#arcade" onclick="toggleMobileDrawer(); playClickSound()" class="p-3 rounded-xl vintage-card text-center">04. Arcade</a>
+        <a href="#telegraph" onclick="toggleMobileDrawer(); playClickSound()" class="col-span-2 p-3 rounded-xl brass-btn text-center">05. Direct Telegraph</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== MAIN CONTENT CONTAINER ==================== -->
+  <main id="top" class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- ==================== 2. HERO & RETRO COMMAND CONSOLE ==================== -->
+    <section class="py-12 sm:py-16 lg:py-20">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+        
+        <!-- Left Editorial Column (7 Cols) -->
+        <div class="lg:col-span-7 space-y-6">
+          <div class="inline-flex flex-wrap items-center gap-2.5 px-3.5 py-1.5 rounded-full vintage-card font-mono text-xs">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span style="color: var(--accent-brass);" class="font-semibold">ATHEIST • RATIONALIST • BUILDER</span>
+            <span class="opacity-40">|</span>
+            <span style="color: var(--text-secondary);">Bareilly, IN</span>
+          </div>
+
+          <div class="space-y-3">
+            <p class="font-mono text-xs sm:text-sm uppercase tracking-[0.25em]" style="color: var(--text-secondary);">
+              Archive Vol. IV // Personal Dossier
+            </p>
+            <h1 class="font-serif font-extrabold text-4xl sm:text-6xl lg:text-7xl leading-[1.04] tracking-tight">
+              ANSH <span class="italic" style="color: var(--accent-brass);">GANGWAR</span>
+            </h1>
+          </div>
+
+          <!-- Typewriter Subtitle -->
+          <div class="font-mono text-base sm:text-xl flex items-center gap-2 min-h-[2rem]">
+            <span style="color: var(--accent-brass);">&gt;&gt;</span>
+            <span id="hero-typewriter" class="font-semibold"></span>
+            <span class="caret-blink font-bold" style="color: var(--accent-brass);">█</span>
+          </div>
+
+          <p class="text-base sm:text-lg leading-relaxed max-w-2xl" style="color: var(--text-secondary);">
+            I am an <strong style="color: var(--text-primary);">atheist</strong>, independent software builder, and explorer of dark &amp; grounded philosophy. Unbound by inherited myths or cosmic scripts, I craft sharp web applications and inspect life through cold reason, stoic clarity, and relentless curiosity.
+          </p>
+
+          <!-- Action Bar -->
+          <div class="flex flex-wrap items-center gap-3 pt-2">
+            <a href="#philosophy" onclick="playClickSound()" class="brass-btn px-6 py-3.5 rounded-2xl text-sm sm:text-base inline-flex items-center gap-2">
+              <span>Explore Philosophy Deck</span>
+              <span>→</span>
+            </a>
+
+            <a href="tel:+919675245009" onclick="playClickSound()" class="px-5 py-3.5 rounded-2xl vintage-card font-mono text-xs sm:text-sm font-semibold inline-flex items-center gap-2">
+              <span style="color: var(--accent-brass);">☎</span>
+              <span>+91 9675245009</span>
+            </a>
+
+            <button onclick="copyText('gangwaransh069@gmail.com', 'Gmail')" class="px-4 py-3.5 rounded-2xl vintage-card font-mono text-xs sm:text-sm font-semibold inline-flex items-center gap-2 cursor-pointer">
+              <span style="color: var(--accent-brass);">✉</span>
+              <span>Copy Gmail</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Right Retro Console & Flippable Wax-Seal Dossier Card (5 Cols) -->
+        <div class="lg:col-span-5 space-y-5">
+          
+          <!-- Flippable Identity Card (Tap to Flip!) -->
+          <div class="flip-perspective h-56 sm:h-60 cursor-pointer" onclick="flipIdentityCard()" title="Tap card to inspect reverse side">
+            <div id="identity-flip-inner" class="flip-inner">
+              
+              <!-- Front Face -->
+              <div class="flip-face absolute inset-0 vintage-card rounded-3xl p-6 flex flex-col justify-between overflow-hidden">
+                <div class="flex items-start justify-between gap-4">
+                  <div>
+                    <span class="font-mono text-[10px] uppercase tracking-[0.2em] px-2.5 py-1 rounded border" style="border-color: var(--border-brass); color: var(--accent-brass);">
+                      Citizen Dossier #019
+                    </span>
+                    <h2 class="font-serif font-bold text-2xl mt-2.5">Ansh Gangwar</h2>
+                    <p class="font-mono text-xs mt-1" style="color: var(--text-secondary);">Atheist • Developer • Dark Realist</p>
+                  </div>
+                  <!-- Wax Seal -->
+                  <div class="w-14 h-14 rounded-full wax-seal flex flex-col items-center justify-center text-amber-100 shrink-0 rotate-6">
+                    <span class="font-serif font-bold text-sm leading-none">NO</span>
+                    <span class="font-mono text-[8px] tracking-widest uppercase mt-0.5">DOGMA</span>
+                  </div>
+                </div>
+
+                <div class="pt-4 border-t flex items-center justify-between font-mono text-xs" style="border-color: var(--border-brass);">
+                  <span style="color: var(--text-secondary);">BAREILLY, UP • INDIA</span>
+                  <span class="font-semibold animate-pulse" style="color: var(--accent-brass);">[ Tap Card to Flip ↻ ]</span>
+                </div>
+              </div>
+
+              <!-- Back Face -->
+              <div class="flip-face flip-back absolute inset-0 vintage-card rounded-3xl p-6 flex flex-col justify-between" style="background: var(--bg-elevated);">
+                <div>
+                  <div class="flex items-center justify-between">
+                    <span class="font-mono text-[10px] uppercase tracking-widest" style="color: var(--accent-brass);">Personal Credo // Classified</span>
+                    <span class="font-mono text-xs">∅ 100%</span>
+                  </div>
+                  <p class="font-serif italic text-base sm:text-lg mt-3 leading-relaxed">
+                    "No gods above, no fate pre-written. When the universe offers silence, you become the author of your own meaning."
+                  </p>
+                </div>
+                <div class="flex items-center justify-between font-mono text-xs pt-3 border-t" style="border-color: var(--border-brass);">
+                  <span>gangwaransh069@gmail.com</span>
+                  <span style="color: var(--accent-brass);">[ Flip Back ↺ ]</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Retro CRT Command Terminal -->
+          <div class="vintage-card rounded-3xl overflow-hidden shadow-2xl">
+            <div class="px-4 py-2.5 border-b flex items-center justify-between" style="border-color: var(--border-brass); background: rgba(0,0,0,0.28);">
+              <div class="flex items-center gap-1.5">
+                <span class="w-2.5 h-2.5 rounded-full bg-red-800"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-amber-600"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-700"></span>
+              </div>
+              <span class="font-mono text-[11px]" style="color: var(--text-secondary);">ansh@vintage-terminal:~</span>
+              <button onclick="execCmd('help')" class="font-mono text-[11px] underline cursor-pointer" style="color: var(--accent-brass);">help</button>
+            </div>
+
+            <div id="crt-log" class="p-4 h-48 overflow-y-auto font-mono text-xs space-y-2" style="background: rgba(10, 8, 6, 0.72); color: #e6dcc8;">
+              <div style="color: var(--accent-brass);">[SYSTEM READY] AnshOS Vintage Shell v4.2 initialized.</div>
+              <div class="text-stone-400">Type a command or tap a brass key: <span class="text-amber-300">atheist</span>, <span class="text-amber-300">quote</span>, <span class="text-amber-300">oracle</span>, <span class="text-amber-300">projects</span>, <span class="text-amber-300">contact</span></div>
+            </div>
+
+            <!-- Quick Command Keys -->
+            <div class="px-3 py-2 border-t flex flex-wrap gap-1.5" style="border-color: var(--border-brass); background: rgba(0,0,0,0.2);">
+              <button onclick="execCmd('atheist')" class="px-2 py-1 rounded bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 font-mono text-[11px] cursor-pointer">atheist</button>
+              <button onclick="execCmd('quote')" class="px-2 py-1 rounded bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 font-mono text-[11px] cursor-pointer">quote</button>
+              <button onclick="execCmd('oracle')" class="px-2 py-1 rounded bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 font-mono text-[11px] cursor-pointer">oracle</button>
+              <button onclick="execCmd('projects')" class="px-2 py-1 rounded bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 font-mono text-[11px] cursor-pointer">projects</button>
+              <button onclick="execCmd('parchment')" class="px-2 py-1 rounded bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 font-mono text-[11px] cursor-pointer">parchment</button>
+              <button onclick="execCmd('clear')" class="px-2 py-1 rounded bg-stone-500/10 hover:bg-stone-500/20 border border-stone-500/30 font-mono text-[11px] cursor-pointer">clear</button>
+            </div>
+
+            <form id="crt-form" class="px-4 py-2.5 border-t flex items-center gap-2" style="border-color: var(--border-brass); background: rgba(10, 8, 6, 0.85);">
+              <span class="font-mono text-xs font-bold" style="color: var(--accent-brass);">$</span>
+              <input id="crt-input" type="text" autocomplete="off" placeholder="Enter command (try 'oracle' or 'beliefs')..." class="w-full bg-transparent font-mono text-xs text-amber-100 placeholder-stone-500 focus:outline-none" />
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 3. PHILOSOPHY, ATHEISM & VOID ORACLE ==================== -->
+    <section id="philosophy" class="py-16 sm:py-24 border-t" style="border-color: var(--border-brass);">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+        <div>
+          <span class="font-mono text-xs uppercase tracking-[0.22em]" style="color: var(--accent-brass);">Chapter I // Worldview &amp; Abyss</span>
+          <h2 class="font-serif font-bold text-3xl sm:text-5xl mt-1">Atheism, Dark &amp; Grounded <span class="italic" style="color: var(--accent-brass);">Philosophy</span></h2>
+        </div>
+
+        <!-- Category Filters -->
+        <div class="flex flex-wrap gap-2">
+          <button onclick="setQuoteCategory('all')" data-qcat="all" class="qcat-btn brass-btn px-4 py-2 rounded-xl font-mono text-xs cursor-pointer">All Reflections</button>
+          <button onclick="setQuoteCategory('dark')" data-qcat="dark" class="qcat-btn vintage-card px-4 py-2 rounded-xl font-mono text-xs cursor-pointer">Dark Philosophy</button>
+          <button onclick="setQuoteCategory('atheist')" data-qcat="atheist" class="qcat-btn vintage-card px-4 py-2 rounded-xl font-mono text-xs cursor-pointer">Rational Atheist</button>
+          <button onclick="setQuoteCategory('stoic')" data-qcat="stoic" class="qcat-btn vintage-card px-4 py-2 rounded-xl font-mono text-xs cursor-pointer">Grounded &amp; Stoic</button>
+        </div>
+      </div>
+
+      <!-- Main Wisdom Deck + Void Oracle Split -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch mb-10">
+        
+        <!-- Vintage Tarot-Style Quote Card Stage (8 Cols) -->
+        <div class="lg:col-span-8 vintage-card rounded-3xl p-6 sm:p-10 flex flex-col justify-between relative overflow-hidden">
+          <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
+            <div class="flex items-center gap-2.5">
+              <span id="deck-badge" class="px-3 py-1 rounded-full font-mono text-xs uppercase border" style="border-color: var(--border-brass); color: var(--accent-brass);">
+                Dark Philosophy
+              </span>
+              <span id="deck-index" class="font-mono text-xs" style="color: var(--text-secondary);">Card 01 / 14</span>
+            </div>
+
+            <button onclick="toggleCandleMode()" id="candle-btn" class="px-3 py-1.5 rounded-xl vintage-card font-mono text-xs cursor-pointer">
+              🕯️ Candlelight Focus
+            </button>
+          </div>
+
+          <blockquote id="quote-box" class="my-4 min-h-[130px] flex flex-col justify-center transition-all duration-300">
+            <p id="deck-quote-text" class="font-serif italic text-xl sm:text-3xl leading-snug">
+              "The universe is neither cruel nor kind; it is magnificently indifferent—and in that cold silence lies our purest freedom."
+            </p>
+            <footer class="mt-5 font-mono text-xs sm:text-sm flex items-center gap-2" style="color: var(--text-secondary);">
+              <span style="color: var(--accent-brass);">—</span>
+              <cite id="deck-quote-author" class="not-italic font-semibold" style="color: var(--text-primary);">Ansh Gangwar</cite>
+            </footer>
+          </blockquote>
+
+          <div class="pt-6 border-t flex flex-wrap items-center justify-between gap-3" style="border-color: var(--border-brass);">
+            <div class="flex items-center gap-2.5">
+              <button onclick="stepQuote(-1)" class="px-4 py-2.5 rounded-xl vintage-card font-mono text-xs font-semibold cursor-pointer">
+                ← Prev Card
+              </button>
+              <button onclick="stepQuote(1)" class="px-5 py-2.5 rounded-xl brass-btn font-mono text-xs cursor-pointer">
+                Draw Next Card →
+              </button>
+              <button onclick="shuffleQuote()" class="px-3.5 py-2.5 rounded-xl vintage-card font-mono text-xs cursor-pointer" title="Shuffle Deck">
+                🎲 Shuffle
+              </button>
+            </div>
+
+            <button onclick="copyActiveQuote()" class="px-4 py-2.5 rounded-xl vintage-card font-mono text-xs cursor-pointer">
+              Copy Quote
+            </button>
+          </div>
+        </div>
+
+        <!-- Playful Brass Mechanical "Void Oracle" Dispenser (4 Cols) -->
+        <div class="lg:col-span-4 vintage-card rounded-3xl p-6 sm:p-7 flex flex-col justify-between text-center relative overflow-hidden">
+          <div>
+            <span class="font-mono text-[10px] uppercase tracking-[0.22em]" style="color: var(--accent-brass);">Mechanical Thought Dispenser</span>
+            <h3 class="font-serif font-bold text-2xl mt-1">The Void Oracle</h3>
+            <p class="text-xs mt-1.5" style="color: var(--text-secondary);">
+              Pull the brass lever to stamp a raw existential, atheist, or stoic truth onto the ticket.
+            </p>
+          </div>
+
+          <!-- Stamped Paper Ticket Output -->
+          <div class="my-5 p-4 rounded-2xl border-2 border-dashed relative min-h-[135px] flex flex-col items-center justify-center" style="border-color: var(--border-brass); background: rgba(0,0,0,0.22);">
+            <span id="oracle-stamp-tag" class="font-mono text-[10px] uppercase tracking-widest px-2 py-0.5 rounded bg-red-900/40 text-amber-200 mb-2">
+              READY TO STAMP
+            </span>
+            <p id="oracle-ticket-text" class="font-mono text-xs sm:text-sm leading-relaxed">
+              "Nothing is written in the stars. Pull the lever below."
+            </p>
+          </div>
+
+          <button id="oracle-lever-btn" onclick="pullVoidOracle()" class="w-full py-3.5 rounded-2xl brass-btn font-mono text-xs sm:text-sm uppercase tracking-wider cursor-pointer">
+            ⚙ Pull Brass Lever
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Three Core Worldview Pillars -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="tilt-card vintage-card rounded-3xl p-6 space-y-3">
+          <div class="w-11 h-11 rounded-2xl wax-seal flex items-center justify-center font-mono text-amber-100 font-bold text-lg">
+            ∅
+          </div>
+          <h3 class="font-serif font-bold text-xl">Unapologetic Atheism</h3>
+          <p class="text-sm leading-relaxed" style="color: var(--text-secondary);">
+            I reject blind faith, supernatural authority, and fear-driven dogma. Reality stands on evidence, logic, and human inquiry—making this one finite life extraordinarily precious.
+          </p>
+        </div>
+
+        <div class="tilt-card vintage-card rounded-3xl p-6 space-y-3">
+          <div class="w-11 h-11 rounded-2xl wax-seal flex items-center justify-center font-mono text-amber-100 font-bold text-lg">
+            ☠
+          </div>
+          <h3 class="font-serif font-bold text-xl">Dark Realism</h3>
+          <p class="text-sm leading-relaxed" style="color: var(--text-secondary);">
+            Looking straight at mortality, entropy, and cosmic insignificance burns away trivial anxiety. When nothing lasts forever, fear loses its leverage over how boldly you live.
+          </p>
+        </div>
+
+        <div class="tilt-card vintage-card rounded-3xl p-6 space-y-3">
+          <div class="w-11 h-11 rounded-2xl wax-seal flex items-center justify-center font-mono text-amber-100 font-bold text-lg">
+            ⚖
+          </div>
+          <h3 class="font-serif font-bold text-xl">Grounded Stoicism</h3>
+          <p class="text-sm leading-relaxed" style="color: var(--text-secondary);">
+            Without divine rescue or cosmic karma, accountability is total. Discipline, emotional clarity, and purposeful craft are the anchors that keep a rational mind steady.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 4. ABOUT DOSSIER & TACTILE SKILL INDEX ==================== -->
+    <section id="dossier" class="py-16 sm:py-24 border-t" style="border-color: var(--border-brass);">
+      <div class="mb-12">
+        <span class="font-mono text-xs uppercase tracking-[0.22em]" style="color: var(--accent-brass);">Chapter II // Subject Profile</span>
+        <h2 class="font-serif font-bold text-3xl sm:text-5xl mt-1">Personal <span class="italic" style="color: var(--accent-brass);">Dossier</span> &amp; Craft</h2>
+      </div>
+
+      <!-- Under-30 Metrics Row -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-10">
+        <div class="tilt-card vintage-card rounded-3xl p-5 sm:p-6">
+          <span class="font-mono text-[11px] uppercase" style="color: var(--text-secondary);">Completed Projects</span>
+          <div class="font-serif font-extrabold text-4xl sm:text-5xl my-2" style="color: var(--accent-brass);">16</div>
+          <span class="font-mono text-xs" style="color: var(--text-secondary);">Web apps &amp; interfaces</span>
+        </div>
+
+        <div class="tilt-card vintage-card rounded-3xl p-5 sm:p-6">
+          <span class="font-mono text-[11px] uppercase" style="color: var(--text-secondary);">Code Repositories</span>
+          <div class="font-serif font-extrabold text-4xl sm:text-5xl my-2" style="color: var(--accent-brass);">23</div>
+          <span class="font-mono text-xs" style="color: var(--text-secondary);">Builds &amp; experiments</span>
+        </div>
+
+        <div class="tilt-card vintage-card rounded-3xl p-5 sm:p-6">
+          <span class="font-mono text-[11px] uppercase" style="color: var(--text-secondary);">Collaborations</span>
+          <div class="font-serif font-extrabold text-4xl sm:text-5xl my-2" style="color: var(--accent-brass);">11</div>
+          <span class="font-mono text-xs" style="color: var(--text-secondary);">Satisfied partners</span>
+        </div>
+
+        <div class="tilt-card vintage-card rounded-3xl p-5 sm:p-6">
+          <span class="font-mono text-[11px] uppercase" style="color: var(--text-secondary);">Core Disciplines</span>
+          <div class="font-serif font-extrabold text-4xl sm:text-5xl my-2" style="color: var(--accent-brass);">14</div>
+          <span class="font-mono text-xs" style="color: var(--text-secondary);">Tools &amp; frameworks</span>
+        </div>
+      </div>
+
+      <!-- Tactile Skill Index Cards + Blueprint Reader -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4" id="skills-grid">
+          <!-- Populated by JS -->
+        </div>
+
+        <div class="lg:col-span-5 vintage-card rounded-3xl p-6 sm:p-8 sticky top-24">
+          <div class="flex items-center justify-between border-b pb-4 mb-4" style="border-color: var(--border-brass);">
+            <span class="font-mono text-xs uppercase tracking-widest" style="color: var(--accent-brass);">Blueprint Specification</span>
+            <span id="spec-code" class="font-mono text-xs px-2.5 py-0.5 rounded bg-amber-500/15">SPEC-01</span>
+          </div>
+          <h3 id="spec-title" class="font-serif font-bold text-2xl">Frontend Architecture &amp; UI</h3>
+          <p id="spec-desc" class="text-sm leading-relaxed mt-3" style="color: var(--text-secondary);">
+            Crafting responsive, tactile interfaces using modern HTML5, Tailwind CSS, JavaScript (ES6+), and React—engineered for speed, crisp typography, and fluid motion on mobile and desktop.
+          </p>
+          <div id="spec-tags" class="flex flex-wrap gap-2 mt-5 pt-4 border-t" style="border-color: var(--border-brass);">
+            <span class="px-3 py-1 rounded-lg font-mono text-xs bg-amber-500/10 border border-amber-500/25">JavaScript</span>
+            <span class="px-3 py-1 rounded-lg font-mono text-xs bg-amber-500/10 border border-amber-500/25">React</span>
+            <span class="px-3 py-1 rounded-lg font-mono text-xs bg-amber-500/10 border border-amber-500/25">Tailwind CSS</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 5. WORKSHOP (SELECTED WORKS < 30) ==================== -->
+    <section id="workshop" class="py-16 sm:py-24 border-t" style="border-color: var(--border-brass);">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+        <div>
+          <span class="font-mono text-xs uppercase tracking-[0.22em]" style="color: var(--accent-brass);">Chapter III // Engineering Log</span>
+          <h2 class="font-serif font-bold text-3xl sm:text-5xl mt-1">The <span class="italic" style="color: var(--accent-brass);">Workshop</span></h2>
+        </div>
+
+        <div class="flex flex-wrap gap-2">
+          <button onclick="filterWorkshop('all')" data-wcat="all" class="wcat-btn brass-btn px-4 py-2 rounded-xl font-mono text-xs cursor-pointer">All Builds (16)</button>
+          <button onclick="filterWorkshop('web')" data-wcat="web" class="wcat-btn vintage-card px-4 py-2 rounded-xl font-mono text-xs cursor-pointer">Web Systems</button>
+          <button onclick="filterWorkshop('philosophy')" data-wcat="philosophy" class="wcat-btn vintage-card px-4 py-2 rounded-xl font-mono text-xs cursor-pointer">Mind &amp; Tools</button>
+        </div>
+      </div>
+
+      <div id="workshop-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+        <!-- Populated by JS -->
+      </div>
+    </section>
+
+    <!-- ==================== 6. VINTAGE PARLOR ARCADE (2 FUN MINI-GAMES!) ==================== -->
+    <section id="arcade" class="py-16 sm:py-24 border-t" style="border-color: var(--border-brass);">
+      <div class="mb-12">
+        <span class="font-mono text-xs uppercase tracking-[0.22em]" style="color: var(--accent-brass);">Chapter IV // Leisure &amp; Reflexes</span>
+        <h2 class="font-serif font-bold text-3xl sm:text-5xl mt-1">The Parlor <span class="italic" style="color: var(--accent-brass);">Arcade</span></h2>
+        <p class="text-sm sm:text-base mt-2 max-w-2xl" style="color: var(--text-secondary);">
+          Take a break from philosophy and test your speed or deduction in two built-in analog parlor games.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        
+        <!-- GAME 1: BRASS TELEGRAPH REFLEX -->
+        <div class="vintage-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between gap-2">
+              <span class="font-mono text-[11px] uppercase tracking-widest px-2.5 py-1 rounded bg-amber-500/15" style="color: var(--accent-brass);">Machine 01</span>
+              <span class="font-mono text-xs" style="color: var(--text-secondary);">Best Score: <strong id="reflex-best" style="color: var(--accent-brass);">0</strong></span>
+            </div>
+            <h3 class="font-serif font-bold text-2xl mt-2">Brass Telegraph Signal</h3>
+            <p class="text-xs sm:text-sm mt-1" style="color: var(--text-secondary);">
+              Intercept the lit brass vacuum tubes before the 15-second clock runs dry. Consecutive hits build your combo!
+            </p>
+
+            <!-- HUD -->
+            <div class="grid grid-cols-3 gap-3 my-4 text-center font-mono">
+              <div class="p-2.5 rounded-xl border" style="border-color: var(--border-brass); background: rgba(0,0,0,0.2);">
+                <span class="block text-[10px] uppercase opacity-70">Points</span>
+                <span id="reflex-score" class="text-lg font-bold" style="color: var(--accent-brass);">0</span>
+              </div>
+              <div class="p-2.5 rounded-xl border" style="border-color: var(--border-brass); background: rgba(0,0,0,0.2);">
+                <span class="block text-[10px] uppercase opacity-70">Clock</span>
+                <span id="reflex-time" class="text-lg font-bold">15s</span>
+              </div>
+              <div class="p-2.5 rounded-xl border" style="border-color: var(--border-brass); background: rgba(0,0,0,0.2);">
+                <span class="block text-[10px] uppercase opacity-70">Combo</span>
+                <span id="reflex-combo" class="text-lg font-bold text-emerald-400">x1</span>
+              </div>
+            </div>
+
+            <!-- 4x4 Vacuum Tube Grid -->
+            <div id="reflex-grid" class="grid grid-cols-4 gap-2.5 p-3 rounded-2xl border max-w-xs mx-auto aspect-square" style="border-color: var(--border-brass); background: rgba(0,0,0,0.35);">
+              <!-- 16 cells populated by JS -->
+            </div>
+          </div>
+
+          <div class="mt-6 flex items-center justify-between gap-3">
+            <span id="reflex-status" class="font-mono text-xs" style="color: var(--text-secondary);">Press Start to engage tubes</span>
+            <button id="reflex-btn" onclick="startTelegraphGame()" class="brass-btn px-5 py-2.5 rounded-xl font-mono text-xs uppercase cursor-pointer">
+              Start Round
+            </button>
+          </div>
+        </div>
+
+        <!-- GAME 2: THE SKEPTIC'S COMBINATION VAULT (Tactile Timing & Riddle Lock) -->
+        <div class="vintage-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between gap-2">
+              <span class="font-mono text-[11px] uppercase tracking-widest px-2.5 py-1 rounded bg-red-900/30 text-amber-300">Machine 02</span>
+              <span class="font-mono text-xs" style="color: var(--text-secondary);">Stage <strong id="vault-stage" style="color: var(--accent-brass);">1 / 3</strong></span>
+            </div>
+            <h3 class="font-serif font-bold text-2xl mt-2">The Skeptic's Brass Vault</h3>
+            <p class="text-xs sm:text-sm mt-1" style="color: var(--text-secondary);">
+              Crack all 3 tumbler pins by stopping the oscillating brass needle inside the highlighted golden zone!
+            </p>
+
+            <!-- Tumbler Status Pins -->
+            <div class="flex items-center justify-center gap-4 my-5">
+              <div id="pin-1" class="w-12 h-12 rounded-full border-2 flex items-center justify-center font-mono text-sm font-bold" style="border-color: var(--border-brass);">01</div>
+              <div class="w-8 h-0.5" style="background: var(--border-brass);"></div>
+              <div id="pin-2" class="w-12 h-12 rounded-full border-2 flex items-center justify-center font-mono text-sm font-bold" style="border-color: var(--border-brass);">02</div>
+              <div class="w-8 h-0.5" style="background: var(--border-brass);"></div>
+              <div id="pin-3" class="w-12 h-12 rounded-full border-2 flex items-center justify-center font-mono text-sm font-bold" style="border-color: var(--border-brass);">03</div>
+            </div>
+
+            <!-- Oscillating Brass Lock Track -->
+            <div class="my-6 p-5 rounded-2xl border" style="border-color: var(--border-brass); background: rgba(0,0,0,0.3);">
+              <div class="relative w-full h-8 rounded-full overflow-hidden border" style="border-color: var(--border-brass); background: #0d0b09;">
+                <!-- Sweet Spot Target Zone -->
+                <div id="vault-target" class="absolute top-0 bottom-0 bg-amber-500/35 border-x-2 border-amber-400" style="left: 38%; width: 24%;"></div>
+                <!-- Moving Needle -->
+                <div id="vault-needle" class="absolute top-0 bottom-0 w-1.5 bg-red-500 shadow-[0_0_12px_#ef4444]" style="left: 10%;"></div>
+              </div>
+              <p id="vault-clue" class="font-serif italic text-sm text-center mt-4" style="color: var(--text-primary);">
+                "Pin 1: Precision over superstition. Strike when the needle enters the brass band."
+              </p>
+            </div>
+          </div>
+
+          <div class="mt-4 flex items-center justify-between gap-3">
+            <button onclick="resetVaultGame()" class="px-4 py-2.5 rounded-xl vintage-card font-mono text-xs cursor-pointer">
+              Reset Lock
+            </button>
+            <button id="vault-strike-btn" onclick="strikeVaultTumbler()" class="brass-btn px-6 py-2.5 rounded-xl font-mono text-xs uppercase cursor-pointer">
+              🔒 Strike Tumbler
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== 7. TELEGRAPH & DIRECT DISPATCH ==================== -->
+    <section id="telegraph" class="py-16 sm:py-24 border-t" style="border-color: var(--border-brass);">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+        
+        <!-- Left Direct Channels (5 Cols) -->
+        <div class="lg:col-span-5 space-y-6">
+          <div>
+            <span class="font-mono text-xs uppercase tracking-[0.22em]" style="color: var(--accent-brass);">Chapter V // Direct Line</span>
+            <h2 class="font-serif font-bold text-3xl sm:text-5xl mt-1">Send a <span class="italic" style="color: var(--accent-brass);">Telegraph</span></h2>
+            <p class="text-sm sm:text-base mt-3 leading-relaxed" style="color: var(--text-secondary);">
+              Whether you want to collaborate on a build, debate philosophy, or discuss an opportunity—reach out directly by phone, Gmail, or dispatch below.
+            </p>
+          </div>
+
+          <div class="space-y-3.5">
+            <!-- Phone Direct Card -->
+            <div class="vintage-card rounded-2xl p-4 flex items-center justify-between gap-3">
+              <a href="tel:+919675245009" onclick="playClickSound()" class="flex items-center gap-3.5 flex-1 min-w-0">
+                <div class="w-11 h-11 rounded-xl brass-btn flex items-center justify-center text-base shrink-0">☎</div>
+                <div class="truncate">
+                  <span class="block font-mono text-[11px] uppercase" style="color: var(--text-secondary);">Telephone (Tap to Call)</span>
+                  <span class="font-mono font-bold text-sm sm:text-base">+91 9675245009</span>
+                </div>
+              </a>
+              <button onclick="copyText('+91 9675245009', 'Phone')" class="px-3 py-1.5 rounded-lg vintage-card font-mono text-xs cursor-pointer">Copy</button>
+            </div>
+
+            <!-- Gmail Direct Card -->
+            <div class="vintage-card rounded-2xl p-4 flex items-center justify-between gap-3">
+              <a href="mailto:gangwaransh069@gmail.com" onclick="playClickSound()" class="flex items-center gap-3.5 flex-1 min-w-0">
+                <div class="w-11 h-11 rounded-xl brass-btn flex items-center justify-center text-base shrink-0">✉</div>
+                <div class="truncate">
+                  <span class="block font-mono text-[11px] uppercase" style="color: var(--text-secondary);">Electronic Mail</span>
+                  <span class="font-mono font-bold text-xs sm:text-sm truncate block">gangwaransh069@gmail.com</span>
+                </div>
+              </a>
+              <button onclick="copyText('gangwaransh069@gmail.com', 'Gmail')" class="px-3 py-1.5 rounded-lg vintage-card font-mono text-xs cursor-pointer">Copy</button>
+            </div>
+
+            <!-- Location Card -->
+            <div class="vintage-card rounded-2xl p-4 flex items-center justify-between">
+              <div class="flex items-center gap-3.5">
+                <div class="w-11 h-11 rounded-xl border flex items-center justify-center font-mono" style="border-color: var(--border-brass); color: var(--accent-brass);">⌖</div>
+                <div>
+                  <span class="block font-mono text-[11px] uppercase" style="color: var(--text-secondary);">Coordinates</span>
+                  <span class="font-semibold text-sm">Bareilly, Uttar Pradesh, India</span>
+                </div>
+              </div>
+              <span class="font-mono text-xs text-emerald-500">IST</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Telegraph Dispatch Form (7 Cols) -->
+        <div class="lg:col-span-7 vintage-card rounded-3xl p-6 sm:p-8">
+          <form id="telegraph-form" class="space-y-5">
+            <div>
+              <label class="block font-mono text-xs uppercase tracking-wider mb-2" style="color: var(--text-secondary);">Dispatch Subject</label>
+              <div class="flex flex-wrap gap-2">
+                <button type="button" onclick="chooseSubject(this, 'Project Build')" class="subj-btn brass-btn px-3.5 py-1.5 rounded-xl font-mono text-xs cursor-pointer">Project Build</button>
+                <button type="button" onclick="chooseSubject(this, 'Philosophy & Debate')" class="subj-btn vintage-card px-3.5 py-1.5 rounded-xl font-mono text-xs cursor-pointer">Philosophy &amp; Debate</button>
+                <button type="button" onclick="chooseSubject(this, 'Freelance / Work')" class="subj-btn vintage-card px-3.5 py-1.5 rounded-xl font-mono text-xs cursor-pointer">Freelance / Work</button>
+              </div>
+              <input type="hidden" id="telegraph-subject" value="Project Build" />
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label for="tg-name" class="block font-mono text-xs uppercase mb-1.5" style="color: var(--text-secondary);">Your Name</label>
+                <input id="tg-name" type="text" required placeholder="e.g. Aryan Verma" class="w-full px-4 py-3 rounded-xl border font-mono text-xs sm:text-sm bg-black/25 focus:outline-none" style="border-color: var(--border-brass);" />
+              </div>
+              <div>
+                <label for="tg-email" class="block font-mono text-xs uppercase mb-1.5" style="color: var(--text-secondary);">Return Address (Email)</label>
+                <input id="tg-email" type="email" required placeholder="you@domain.com" class="w-full px-4 py-3 rounded-xl border font-mono text-xs sm:text-sm bg-black/25 focus:outline-none" style="border-color: var(--border-brass);" />
+              </div>
+            </div>
+
+            <div>
+              <label for="tg-body" class="block font-mono text-xs uppercase mb-1.5" style="color: var(--text-secondary);">Telegraph Message</label>
+              <textarea id="tg-body" rows="4" required placeholder="Write your message for Ansh Gangwar..." class="w-full px-4 py-3 rounded-xl border font-mono text-xs sm:text-sm bg-black/25 focus:outline-none resize-none" style="border-color: var(--border-brass);"></textarea>
+            </div>
+
+            <button type="submit" class="w-full py-3.5 rounded-2xl brass-btn font-mono text-xs sm:text-sm uppercase tracking-wider cursor-pointer">
+              ⚡ Transmit Telegraph Dispatch
+            </button>
+          </form>
+
+          <!-- Stamped Confirmation -->
+          <div id="telegraph-receipt" class="hidden py-8 text-center space-y-4">
+            <div class="w-16 h-16 rounded-full wax-seal mx-auto flex items-center justify-center font-serif font-bold text-amber-100 text-xl animate-stamp">
+              SENT
+            </div>
+            <h3 class="font-serif font-bold text-2xl">Dispatch Logged &amp; Stamped</h3>
+            <p id="receipt-details" class="font-mono text-xs sm:text-sm max-w-md mx-auto" style="color: var(--text-secondary);"></p>
+            <div class="flex flex-wrap justify-center gap-3 pt-2">
+              <a id="mailto-launch-btn" href="mailto:gangwaransh069@gmail.com" class="brass-btn px-5 py-2.5 rounded-xl font-mono text-xs">
+                Open in Mail App ↗
+              </a>
+              <button onclick="resetTelegraph()" class="vintage-card px-5 py-2.5 rounded-xl font-mono text-xs cursor-pointer">
+                New Dispatch
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== VINTAGE FOOTER ==================== -->
+  <footer class="relative z-10 border-t py-8 mt-6" style="border-color: var(--border-brass);">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs" style="color: var(--text-secondary);">
+      <div class="flex flex-wrap items-center justify-center gap-2">
+        <strong style="color: var(--text-primary);">ANSH GANGWAR</strong>
+        <span>•</span>
+        <span>Atheist &amp; Builder</span>
+        <span>•</span>
+        <a href="tel:+919675245009" class="hover:underline">+91 9675245009</a>
+        <span>•</span>
+        <a href="mailto:gangwaransh069@gmail.com" class="hover:underline">gangwaransh069@gmail.com</a>
+      </div>
+      <a href="#top" onclick="playClickSound()" style="color: var(--accent-brass);" class="hover:underline">Return to Top ↑</a>
+    </div>
+  </footer>
+
+  <!-- ==================== CASE STUDY MODAL ==================== -->
+  <div id="case-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+    <div class="vintage-card rounded-3xl max-w-xl w-full p-6 sm:p-8 relative max-h-[90vh] overflow-y-auto" style="background: var(--bg-elevated);">
+      <button onclick="closeCaseModal()" class="absolute top-5 right-5 w-9 h-9 rounded-xl vintage-card flex items-center justify-center font-mono cursor-pointer">✕</button>
+      <span id="cm-cat" class="font-mono text-xs uppercase tracking-widest" style="color: var(--accent-brass);">Category</span>
+      <h3 id="cm-title" class="font-serif font-bold text-2xl sm:text-3xl mt-1">Project Title</h3>
+      <p id="cm-desc" class="text-sm leading-relaxed mt-3" style="color: var(--text-secondary);"></p>
+      <div class="mt-5 p-4 rounded-2xl border" style="border-color: var(--border-brass); background: rgba(0,0,0,0.25);">
+        <span class="font-mono text-[11px] uppercase block mb-2" style="color: var(--accent-brass);">Technical Highlights</span>
+        <ul id="cm-points" class="space-y-2 text-xs sm:text-sm"></ul>
+      </div>
+      <div id="cm-tags" class="flex flex-wrap gap-2 mt-5"></div>
+    </div>
+  </div>
+
+  <!-- ==================== JAVASCRIPT ENGINE ==================== -->
+  <script>
+    /* -------------------- 1. WEB AUDIO SYNTH (TACTILE MECHANICAL CLICKS) -------------------- */
+    let sfxEnabled = false;
+    let audioCtx = null;
+
+    function toggleSoundEngine() {
+      sfxEnabled = !sfxEnabled;
+      const dot = document.getElementById("audio-dot");
+      const label = document.getElementById("audio-label");
+      if (sfxEnabled) {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        dot.className = "w-2 h-2 rounded-full bg-emerald-400 animate-ping";
+        label.textContent = "SFX: ON";
+        playClickSound(520);
+        showToast("Mechanical audio enabled");
+      } else {
+        dot.className = "w-2 h-2 rounded-full bg-stone-500";
+        label.textContent = "SFX: OFF";
+        showToast("Mechanical audio muted");
+      }
+    }
+
+    function playClickSound(freq = 320) {
+      if (!sfxEnabled) return;
+      try {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === "suspended") audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = "triangle";
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(75, audioCtx.currentTime + 0.045);
+        gain.gain.setValueAtTime(0.14, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.045);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.05);
+      } catch (e) {}
+    }
+
+    /* -------------------- 2. DATA ARCHIVE -------------------- */
+    const HERO_LINES = [
+      "Atheist & Rational Thinker",
+      "Full-Stack Web Architect",
+      "Dark & Stoic Realist",
+      "Crafted in Bareilly, India"
+    ];
+
+    const PHILOSOPHY_DECK = [
+      {
+        cat: "dark",
+        label: "Dark Philosophy",
+        text: "The universe is neither cruel nor kind; it is magnificently indifferent—and in that cold silence lies our purest freedom.",
+        author: "Ansh Gangwar"
+      },
+      {
+        cat: "atheist",
+        label: "Rational Atheist",
+        text: "I would rather have questions that cannot be answered than answers that cannot be questioned.",
+        author: "Richard Feynman"
+      },
+      {
+        cat: "dark",
+        label: "Dark Philosophy",
+        text: "We are a brief spark between two eternal darknesses. Wasting that spark on borrowed illusions is the only real tragedy.",
+        author: "Ansh Gangwar"
+      },
+      {
+        cat: "stoic",
+        label: "Grounded & Stoic",
+        text: "You could leave life right now. Let that determine what you do and say and think.",
+        author: "Marcus Aurelius"
+      },
+      {
+        cat: "atheist",
+        label: "Rational Atheist",
+        text: "What can be asserted without evidence can also be dismissed without evidence.",
+        author: "Christopher Hitchens"
+      },
+      {
+        cat: "dark",
+        label: "Dark Philosophy",
+        text: "And if you gaze long into an abyss, the abyss also gazes into you.",
+        author: "Friedrich Nietzsche"
+      },
+      {
+        cat: "atheist",
+        label: "Rational Atheist",
+        text: "For me, it is far better to grasp the Universe as it really is than to persist in delusion, however satisfying and reassuring.",
+        author: "Carl Sagan"
+      },
+      {
+        cat: "stoic",
+        label: "Grounded & Stoic",
+        text: "We suffer more often in imagination than in reality.",
+        author: "Seneca"
+      },
+      {
+        cat: "dark",
+        label: "Dark Philosophy",
+        text: "The literal meaning of life is whatever you're doing that prevents you from killing yourself.",
+        author: "Albert Camus"
+      },
+      {
+        cat: "atheist",
+        label: "Rational Atheist",
+        text: "No divine script is coming to save you—which means every victory you earn belongs solely to your own hands.",
+        author: "Ansh Gangwar"
+      },
+      {
+        cat: "stoic",
+        label: "Grounded & Stoic",
+        text: "Clarity begins the exact moment you stop asking 'why did fate do this?' and start asking 'what will I build next?'",
+        author: "Ansh Gangwar"
+      },
+      {
+        cat: "dark",
+        label: "Dark Philosophy",
+        text: "Every empire, every monument, and every line of code eventually dissolves into dust—so create boldly while your clock still ticks.",
+        author: "Ansh Gangwar"
+      }
+    ];
+
+    const ORACLE_TICKETS = [
+      { tag: "VOID AXIOM #01", text: "No gods watch your screen. Build for excellence, not applause." },
+      { tag: "DARK REALISM #04", text: "Mortality is the sharpest editor—it cuts out everything fake." },
+      { tag: "ATHEIST LOGIC #07", text: "Doubt is not weakness; it is the immune system of a free mind." },
+      { tag: "STOIC ANCHOR #09", text: "Control your code, your discipline, and your mind. Release the rest." },
+      { tag: "VOID AXIOM #12", text: "Meaning is never found lying on the ground—it is forged in fire." },
+      { tag: "DARK REALISM #15", text: "Silence from the cosmos is not abandonment; it is an empty canvas." }
+    ];
+
+    const SKILLS_ARCHIVE = [
+      {
+        code: "SPEC-01",
+        title: "Frontend Architecture & UI",
+        short: "HTML5, Tailwind CSS, React & Motion",
+        desc: "Crafting responsive, tactile interfaces using modern HTML5, Tailwind CSS, JavaScript (ES6+), and React—engineered for speed, crisp typography, and fluid motion on mobile and desktop.",
+        tags: ["JavaScript", "React", "Tailwind CSS", "Responsive UI"]
+      },
+      {
+        code: "SPEC-02",
+        title: "Backend & API Engineering",
+        short: "Node.js, Python & REST Systems",
+        desc: "Designing clean server-side logic, RESTful endpoints, authentication flows, and lightweight automation scripts with Node.js and Python.",
+        tags: ["Node.js", "Python", "REST APIs", "JSON"]
+      },
+      {
+        code: "SPEC-03",
+        title: "Creative Canvas & Web Audio",
+        short: "Physics Particles & Synth Sound",
+        desc: "Building 60fps HTML5 Canvas particle fields, 3D perspective card physics, and zero-dependency Web Audio synthesizers right inside the browser.",
+        tags: ["HTML5 Canvas", "Web Audio API", "3D CSS"]
+      },
+      {
+        code: "SPEC-04",
+        title: "Rational Systems & Writing",
+        short: "Atheist Essays & Analytical Logic",
+        desc: "Applying first-principles skepticism, existential philosophy, and structured problem solving to both software architecture and critical writing.",
+        tags: ["First Principles", "Critical Logic", "Technical Writing"]
+      }
+    ];
+
+    const WORKSHOP_BUILDS = [
+      {
+        id: "void-chronicle",
+        cat: "philosophy",
+        catLabel: "Mind & Philosophy",
+        num: "BUILD 01",
+        title: "The Rationalist's Commonplace Book",
+        summary: "A minimalist digital archive for atheist essays, dark aphorisms, and annotated stoic readings with instant tag indexing.",
+        points: [
+          "Zero-distraction dark sepia reading engine with instant search.",
+          "Curated 24 philosophical essays and counter-apologetic notes.",
+          "Offline-first local storage with single-click markdown export."
+        ],
+        tags: ["JavaScript", "Typography", "LocalStorage"]
+      },
+      {
+        id: "chronos-pulse",
+        cat: "web",
+        catLabel: "Web System",
+        num: "BUILD 02",
+        title: "Chronos Telemetry Console",
+        summary: "A retro-analog productivity and habit tracker modeled after vintage brass instrumentation and railway dispatch boards.",
+        points: [
+          "Tactile mechanical timer with synthesized Web Audio chimes.",
+          "Tracks daily deep-work blocks across 14 personal milestones.",
+          "Responsive mobile-first layout with zero external bloat."
+        ],
+        tags: ["HTML5", "Tailwind CSS", "Web Audio"]
+      },
+      {
+        id: "cipher-slate",
+        cat: "web",
+        catLabel: "Web System",
+        num: "BUILD 03",
+        title: "CipherSlate Local Vault",
+        summary: "Client-side text encryption and private note scratchpad using browser Web Crypto APIs—no servers, no accounts, total autonomy.",
+        points: [
+          "AES-GCM encryption executed 100% locally in the browser.",
+          "Self-destructing session notes with zero cloud tracking.",
+          "Built for privacy-conscious thinkers and developers."
+        ],
+        tags: ["Web Crypto", "TypeScript", "Security"]
+      }
+    ];
+
+    /* -------------------- 3. THEME & PARCHMENT TOGGLE -------------------- */
+    function toggleParchmentMode() {
+      playClickSound(410);
+      const html = document.documentElement;
+      const isParchment = html.classList.toggle("parchment-mode");
+      document.getElementById("theme-icon").textContent = isParchment ? "🕯️" : "📜";
+      document.getElementById("theme-label").textContent = isParchment ? "Dark Study" : "Parchment";
+      showToast(isParchment ? "Aged Parchment mode active" : "Dark Study mode active");
+    }
+
+    function toggleCandleMode() {
+      playClickSound(260);
+      const isCandle = document.documentElement.classList.toggle("candle-mode");
+      document.getElementById("candle-btn").textContent = isCandle ? "☀️ Standard Light" : "🕯️ Candlelight Focus";
+      showToast(isCandle ? "Abyssal Candlelight focus engaged" : "Standard illumination restored");
+    }
+
+    function toggleMobileDrawer() {
+      document.getElementById("mobile-drawer").classList.toggle("hidden");
+    }
+
+    /* -------------------- 4. TOAST & CLIPBOARD -------------------- */
+    function showToast(msg) {
+      const stack = document.getElementById("toast-stack");
+      const el = document.createElement("div");
+      el.className = "px-4 py-2.5 rounded-xl vintage-card font-mono text-xs shadow-xl flex items-center gap-2 transition-all duration-300 opacity-0 translate-y-2";
+      el.innerHTML = `<span class="w-2 h-2 rounded-full" style="background: var(--accent-brass);"></span><span>${msg}</span>`;
+      stack.appendChild(el);
+      requestAnimationFrame(() => el.classList.remove("opacity-0", "translate-y-2"));
+      setTimeout(() => {
+        el.classList.add("opacity-0", "translate-y-2");
+        setTimeout(() => el.remove(), 300);
+      }, 2600);
+    }
+
+    function copyText(val, label) {
+      playClickSound(480);
+      const tmp = document.createElement("input");
+      tmp.value = val;
+      document.body.appendChild(tmp);
+      tmp.select();
+      document.execCommand("copy");
+      document.body.removeChild(tmp);
+      showToast(`${label} copied: ${val}`);
+    }
+
+    /* -------------------- 5. TYPEWRITER HERO -------------------- */
+    let lineIdx = 0;
+    let letterIdx = 0;
+    let deleting = false;
+
+    function runHeroTypewriter() {
+      const el = document.getElementById("hero-typewriter");
+      if (!el) return;
+      const current = HERO_LINES[lineIdx];
+      letterIdx += deleting ? -1 : 1;
+      el.textContent = current.substring(0, letterIdx);
+
+      let wait = deleting ? 38 : 75;
+      if (!deleting && letterIdx === current.length) {
+        wait = 1900;
+        deleting = true;
+      } else if (deleting && letterIdx === 0) {
+        deleting = false;
+        lineIdx = (lineIdx + 1) % HERO_LINES.length;
+        wait = 350;
+      }
+      setTimeout(runHeroTypewriter, wait);
+    }
+
+    /* -------------------- 6. FLIPPABLE DOSSIER CARD -------------------- */
+    function flipIdentityCard() {
+      playClickSound(360);
+      document.getElementById("identity-flip-inner").classList.toggle("is-flipped");
+    }
+
+    /* -------------------- 7. RETRO CRT TERMINAL -------------------- */
+    function writeCrt(html) {
+      const log = document.getElementById("crt-log");
+      const div = document.createElement("div");
+      div.innerHTML = html;
+      log.appendChild(div);
+      log.scrollTop = log.scrollHeight;
+    }
+
+    function execCmd(raw) {
+      const cmd = raw.trim().toLowerCase();
+      if (!cmd) return;
+      playClickSound(390);
+      writeCrt(`<span class="text-amber-500">$</span> <span class="text-amber-100 font-semibold">${cmd}</span>`);
+
+      if (cmd === "help") {
+        writeCrt(`<span class="text-amber-300">Commands:</span> whoami, atheist, beliefs, quote, oracle, projects, contact, parchment, clear`);
+      } else if (cmd === "whoami" || cmd === "about") {
+        writeCrt(`Ansh Gangwar — Atheist, rationalist, and web architect in Bareilly, India (16 builds completed).`);
+      } else if (cmd === "atheist" || cmd === "beliefs") {
+        writeCrt(`<span class="text-red-400">CREDO:</span> Unapologetic Atheist. No gods, no pre-written destiny—only reason, evidence, and total self-ownership.`);
+      } else if (cmd === "quote" || cmd === "philosophy") {
+        const q = PHILOSOPHY_DECK[Math.floor(Math.random() * PHILOSOPHY_DECK.length)];
+        writeCrt(`<span class="italic text-amber-200">"${q.text}"</span> — ${q.author}`);
+      } else if (cmd === "oracle") {
+        pullVoidOracle();
+        const ticket = document.getElementById("oracle-ticket-text").textContent;
+        writeCrt(`<span class="text-amber-400">[ORACLE STAMP]</span> ${ticket}`);
+      } else if (cmd === "projects" || cmd === "workshop") {
+        writeCrt(`16 completed builds (all < 30). Scrolling to Workshop...`);
+        document.getElementById("workshop").scrollIntoView({ behavior: "smooth" });
+      } else if (cmd === "contact" || cmd === "telegraph") {
+        writeCrt(`Phone: <span class="text-amber-300">+91 9675245009</span> | Gmail: <span class="text-amber-300">gangwaransh069@gmail.com</span>`);
+      } else if (cmd === "parchment") {
+        toggleParchmentMode();
+      } else if (cmd === "clear") {
+        document.getElementById("crt-log").innerHTML = "";
+      } else {
+        writeCrt(`<span class="text-red-400">Unknown command '${cmd}'.</span> Type <span class="text-amber-300">help</span>.`);
+      }
+    }
+
+    document.getElementById("crt-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const input = document.getElementById("crt-input");
+      execCmd(input.value);
+      input.value = "";
+    });
+
+    /* -------------------- 8. PHILOSOPHY DECK & VOID ORACLE -------------------- */
+    let activeQCat = "all";
+    let activeQIdx = 0;
+
+    function getDeckSlice() {
+      return activeQCat === "all"
+        ? PHILOSOPHY_DECK
+        : PHILOSOPHY_DECK.filter(q => q.cat === activeQCat);
+    }
+
+    function renderDeckCard() {
+      const slice = getDeckSlice();
+      if (!slice.length) return;
+      if (activeQIdx >= slice.length) activeQIdx = 0;
+      const item = slice[activeQIdx];
+
+      const box = document.getElementById("quote-box");
+      box.style.opacity = "0";
+      setTimeout(() => {
+        document.getElementById("deck-badge").textContent = item.label;
+        document.getElementById("deck-index").textContent = `Card ${String(activeQIdx + 1).padStart(2, "0")} / ${String(slice.length).padStart(2, "0")}`;
+        document.getElementById("deck-quote-text").textContent = `"${item.text}"`;
+        document.getElementById("deck-quote-author").textContent = item.author;
+        box.style.opacity = "1";
+      }, 150);
+    }
+
+    function setQuoteCategory(cat) {
+      playClickSound(350);
+      activeQCat = cat;
+      activeQIdx = 0;
+      document.querySelectorAll(".qcat-btn").forEach(btn => {
+        if (btn.getAttribute("data-qcat") === cat) {
+          btn.className = "qcat-btn brass-btn px-4 py-2 rounded-xl font-mono text-xs cursor-pointer";
+        } else {
+          btn.className = "qcat-btn vintage-card px-4 py-2 rounded-xl font-mono text-xs cursor-pointer";
+        }
+      });
+      renderDeckCard();
+    }
+
+    function stepQuote(dir) {
+      playClickSound(330);
+      const slice = getDeckSlice();
+      activeQIdx = (activeQIdx + dir + slice.length) % slice.length;
+      renderDeckCard();
+    }
+
+    function shuffleQuote() {
+      playClickSound(500);
+      const slice = getDeckSlice();
+      activeQIdx = Math.floor(Math.random() * slice.length);
+      renderDeckCard();
+      showToast("Deck shuffled");
+    }
+
+    function copyActiveQuote() {
+      const slice = getDeckSlice();
+      const item = slice[activeQIdx];
+      copyText(`"${item.text}" — ${item.author}`, "Quote");
+    }
+
+    function pullVoidOracle() {
+      playClickSound(220);
+      const btn = document.getElementById("oracle-lever-btn");
+      const tagEl = document.getElementById("oracle-stamp-tag");
+      const textEl = document.getElementById("oracle-ticket-text");
+
+      btn.disabled = true;
+      tagEl.textContent = "STAMPING...";
+      let ticks = 0;
+      const spin = setInterval(() => {
+        const rand = ORACLE_TICKETS[Math.floor(Math.random() * ORACLE_TICKETS.length)];
+        textEl.textContent = `"${rand.text}"`;
+        playClickSound(280 + ticks * 25);
+        ticks++;
+        if (ticks >= 7) {
+          clearInterval(spin);
+          const finalTicket = ORACLE_TICKETS[Math.floor(Math.random() * ORACLE_TICKETS.length)];
+          tagEl.textContent = finalTicket.tag;
+          tagEl.classList.remove("animate-stamp");
+          void tagEl.offsetWidth;
+          tagEl.classList.add("animate-stamp");
+          textEl.textContent = `"${finalTicket.text}"`;
+          btn.disabled = false;
+        }
+      }, 75);
+    }
+
+    /* -------------------- 9. SKILLS BLUEPRINT INDEX -------------------- */
+    function renderSkillsIndex() {
+      const grid = document.getElementById("skills-grid");
+      grid.innerHTML = "";
+      SKILLS_ARCHIVE.forEach((sk, idx) => {
+        const card = document.createElement("button");
+        card.type = "button";
+        card.className = "tilt-card vintage-card rounded-2xl p-5 text-left cursor-pointer flex flex-col justify-between";
+        card.innerHTML = `
+          <div>
+            <span class="font-mono text-[10px] uppercase tracking-widest" style="color: var(--accent-brass);">${sk.code}</span>
+            <h3 class="font-serif font-bold text-lg mt-1">${sk.title}</h3>
+            <p class="font-mono text-xs mt-1.5" style="color: var(--text-secondary);">${sk.short}</p>
+          </div>
+          <div class="mt-4 pt-3 border-t flex items-center justify-between font-mono text-[11px]" style="border-color: var(--border-brass); color: var(--accent-brass);">
+            <span>Inspect Blueprint</span>
+            <span>→</span>
+          </div>
+        `;
+        card.onclick = () => {
+          playClickSound(400);
+          document.getElementById("spec-code").textContent = sk.code;
+          document.getElementById("spec-title").textContent = sk.title;
+          document.getElementById("spec-desc").textContent = sk.desc;
+          document.getElementById("spec-tags").innerHTML = sk.tags
+            .map(t => `<span class="px-3 py-1 rounded-lg font-mono text-xs bg-amber-500/10 border border-amber-500/25">${t}</span>`)
+            .join("");
+          showToast(`Loaded ${sk.code}`);
+        };
+        grid.appendChild(card);
+      });
+    }
+
+    /* -------------------- 10. WORKSHOP SHOWCASE & MODAL -------------------- */
+    function renderWorkshop(filter = "all") {
+      const grid = document.getElementById("workshop-grid");
+      grid.innerHTML = "";
+      const list = filter === "all" ? WORKSHOP_BUILDS : WORKSHOP_BUILDS.filter(b => b.cat === filter);
+
+      list.forEach(item => {
+        const card = document.createElement("div");
+        card.className = "tilt-card vintage-card rounded-3xl p-6 flex flex-col justify-between";
+        card.innerHTML = `
+          <div>
+            <div class="flex items-center justify-between font-mono text-xs mb-3">
+              <span class="px-2.5 py-0.5 rounded border" style="border-color: var(--border-brass); color: var(--accent-brass);">${item.catLabel}</span>
+              <span style="color: var(--text-secondary);">${item.num}</span>
+            </div>
+            <h3 class="font-serif font-bold text-2xl">${item.title}</h3>
+            <p class="text-sm mt-2.5 leading-relaxed" style="color: var(--text-secondary);">${item.summary}</p>
+            <div class="flex flex-wrap gap-1.5 mt-4">
+              ${item.tags.map(t => `<span class="px-2.5 py-1 rounded-lg font-mono text-[11px] bg-amber-500/10 border border-amber-500/20">${t}</span>`).join("")}
+            </div>
+          </div>
+          <button onclick="openCaseModal('${item.id}')" class="mt-6 w-full py-3 rounded-xl brass-btn font-mono text-xs uppercase cursor-pointer">
+            Inspect Dossier ↗
+          </button>
+        `;
+        grid.appendChild(card);
+      });
+      attachTiltPhysics();
+    }
+
+    function filterWorkshop(cat) {
+      playClickSound(340);
+      document.querySelectorAll(".wcat-btn").forEach(btn => {
+        if (btn.getAttribute("data-wcat") === cat) {
+          btn.className = "wcat-btn brass-btn px-4 py-2 rounded-xl font-mono text-xs cursor-pointer";
+        } else {
+          btn.className = "wcat-btn vintage-card px-4 py-2 rounded-xl font-mono text-xs cursor-pointer";
+        }
+      });
+      renderWorkshop(cat);
+    }
+
+    function openCaseModal(id) {
+      playClickSound(440);
+      const item = WORKSHOP_BUILDS.find(b => b.id === id);
+      if (!item) return;
+      document.getElementById("cm-cat").textContent = `${item.num} // ${item.catLabel}`;
+      document.getElementById("cm-title").textContent = item.title;
+      document.getElementById("cm-desc").textContent = item.summary;
+      document.getElementById("cm-points").innerHTML = item.points
+        .map(p => `<li class="flex items-start gap-2"><span style="color: var(--accent-brass);">◆</span><span>${p}</span></li>`)
+        .join("");
+      document.getElementById("cm-tags").innerHTML = item.tags
+        .map(t => `<span class="px-3 py-1 rounded-lg font-mono text-xs border" style="border-color: var(--border-brass);">${t}</span>`)
+        .join("");
+
+      const modal = document.getElementById("case-modal");
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+    }
+
+    function closeCaseModal() {
+      const modal = document.getElementById("case-modal");
+      modal.classList.add("hidden");
+      modal.classList.remove("flex");
+    }
+
+    /* -------------------- 11. ARCADE GAME 1: BRASS TELEGRAPH SIGNAL -------------------- */
+    let tgScore = 0;
+    let tgBest = 0;
+    let tgCombo = 1;
+    let tgTime = 15;
+    let tgRunning = false;
+    let tgActiveCell = -1;
+    let tgTimer = null;
+
+    function buildReflexGrid() {
+      const grid = document.getElementById("reflex-grid");
+      grid.innerHTML = "";
+      for (let i = 0; i < 16; i++) {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.id = `tube-${i}`;
+        btn.className = "rounded-xl border transition-all duration-100 flex items-center justify-center cursor-pointer";
+        btn.style.borderColor = "var(--border-brass)";
+        btn.style.background = "rgba(255,255,255,0.03)";
+        btn.onclick = () => tapTube(i);
+        grid.appendChild(btn);
+      }
+    }
+
+    function lightRandomTube() {
+      if (tgActiveCell >= 0) {
+        const old = document.getElementById(`tube-${tgActiveCell}`);
+        if (old) {
+          old.className = "rounded-xl border transition-all duration-100 flex items-center justify-center cursor-pointer";
+          old.style.background = "rgba(255,255,255,0.03)";
+          old.innerHTML = "";
+        }
+      }
+      let next = Math.floor(Math.random() * 16);
+      if (next === tgActiveCell) next = (next + 1) % 16;
+      tgActiveCell = next;
+
+      const cell = document.getElementById(`tube-${tgActiveCell}`);
+      if (cell) {
+        cell.className = "rounded-xl brass-btn scale-95 flex items-center justify-center cursor-pointer";
+        cell.innerHTML = `<span class="w-3 h-3 rounded-full bg-red-900"></span>`;
+      }
+    }
+
+    function tapTube(idx) {
+      if (!tgRunning) return;
+      if (idx === tgActiveCell) {
+        playClickSound(540 + tgCombo * 20);
+        tgScore += tgCombo;
+        tgCombo = Math.min(5, tgCombo + 1);
+        document.getElementById("reflex-score").textContent = tgScore;
+        document.getElementById("reflex-combo").textContent = `x${tgCombo}`;
+        lightRandomTube();
+      } else {
+        playClickSound(140);
+        tgCombo = 1;
+        document.getElementById("reflex-combo").textContent = "x1";
+      }
+    }
+
+    function startTelegraphGame() {
+      clearInterval(tgTimer);
+      tgScore = 0;
+      tgCombo = 1;
+      tgTime = 15;
+      tgRunning = true;
+      document.getElementById("reflex-score").textContent = "0";
+      document.getElementById("reflex-combo").textContent = "x1";
+      document.getElementById("reflex-time").textContent = "15s";
+      document.getElementById("reflex-status").textContent = "Signal live! Tap lit tubes!";
+      document.getElementById("reflex-btn").textContent = "Restart";
+      lightRandomTube();
+
+      tgTimer = setInterval(() => {
+        tgTime--;
+        document.getElementById("reflex-time").textContent = `${tgTime}s`;
+        if (tgTime <= 0) {
+          clearInterval(tgTimer);
+          tgRunning = false;
+          if (tgScore > tgBest) {
+            tgBest = tgScore;
+            document.getElementById("reflex-best").textContent = tgBest;
+          }
+          document.getElementById("reflex-status").textContent = `Round over! Score: ${tgScore}`;
+          showToast(`Telegraph Reflex Score: ${tgScore}`);
+        }
+      }, 1000);
+    }
+
+    /* -------------------- 12. ARCADE GAME 2: THE SKEPTIC'S BRASS VAULT -------------------- */
+    let vaultStage = 1;
+    let needlePos = 10;
+    let needleDir = 1;
+    let needleSpeed = 1.45;
+    let targetLeft = 38;
+    let targetWidth = 24;
+    let vaultAnimId = null;
+    let vaultSolved = false;
+
+    const VAULT_CLUES = [
+      "Pin 1: Precision over superstition. Strike when the needle enters the brass band.",
+      "Pin 2: Skepticism sharpens the eye. The window narrows—steady your hand.",
+      "Pin 3: Final tumbler! Master your timing to unseal the archive."
+    ];
+
+    function animateVaultNeedle() {
+      if (!vaultSolved) {
+        needlePos += needleDir * needleSpeed;
+        if (needlePos >= 97) { needlePos = 97; needleDir = -1; }
+        if (needlePos <= 2) { needlePos = 2; needleDir = 1; }
+        const needle = document.getElementById("vault-needle");
+        if (needle) needle.style.left = `${needlePos}%`;
+      }
+      vaultAnimId = requestAnimationFrame(animateVaultNeedle);
+    }
+
+    function strikeVaultTumbler() {
+      if (vaultSolved) {
+        resetVaultGame();
+        return;
+      }
+      const hit = needlePos >= targetLeft && needlePos <= (targetLeft + targetWidth);
+      if (hit) {
+        playClickSound(620);
+        const pinEl = document.getElementById(`pin-${vaultStage}`);
+        if (pinEl) {
+          pinEl.className = "w-12 h-12 rounded-full brass-btn flex items-center justify-center font-mono text-sm font-bold";
+          pinEl.textContent = "✔";
+        }
+        if (vaultStage < 3) {
+          vaultStage++;
+          document.getElementById("vault-stage").textContent = `${vaultStage} / 3`;
+          document.getElementById("vault-clue").textContent = `"${VAULT_CLUES[vaultStage - 1]}"`;
+          targetWidth = vaultStage === 2 ? 18 : 13;
+          targetLeft = Math.floor(15 + Math.random() * (70 - targetWidth));
+          needleSpeed += 0.55;
+          const targetEl = document.getElementById("vault-target");
+          targetEl.style.left = `${targetLeft}%`;
+          targetEl.style.width = `${targetWidth}%`;
+          showToast(`Tumbler ${vaultStage - 1} unlocked!`);
+        } else {
+          vaultSolved = true;
+          document.getElementById("vault-clue").textContent = `"VAULT UNSEALED: 'Reason is the master key to every locked door.'"`;
+          document.getElementById("vault-strike-btn").textContent = "↻ Play Again";
+          showToast("Vault Cracked! All 3 pins unlocked.");
+        }
+      } else {
+        playClickSound(130);
+        showToast("Missed the brass zone! Try again.");
+      }
+    }
+
+    function resetVaultGame() {
+      playClickSound(300);
+      vaultStage = 1;
+      vaultSolved = false;
+      needleSpeed = 1.45;
+      targetLeft = 38;
+      targetWidth = 24;
+      document.getElementById("vault-stage").textContent = "1 / 3";
+      document.getElementById("vault-clue").textContent = `"${VAULT_CLUES[0]}"`;
+      document.getElementById("vault-strike-btn").textContent = "🔒 Strike Tumbler";
+      const targetEl = document.getElementById("vault-target");
+      targetEl.style.left = "38%";
+      targetEl.style.width = "24%";
+
+      [1, 2, 3].forEach(n => {
+        const p = document.getElementById(`pin-${n}`);
+        p.className = "w-12 h-12 rounded-full border-2 flex items-center justify-center font-mono text-sm font-bold";
+        p.style.borderColor = "var(--border-brass)";
+        p.textContent = `0${n}`;
+      });
+    }
+
+    /* -------------------- 13. TELEGRAPH FORM -------------------- */
+    function chooseSubject(btn, subj) {
+      playClickSound(340);
+      document.getElementById("telegraph-subject").value = subj;
+      document.querySelectorAll(".subj-btn").forEach(b => {
+        b.className = "subj-btn vintage-card px-3.5 py-1.5 rounded-xl font-mono text-xs cursor-pointer";
+      });
+      btn.className = "subj-btn brass-btn px-3.5 py-1.5 rounded-xl font-mono text-xs cursor-pointer";
+    }
+
+    document.getElementById("telegraph-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+      playClickSound(520);
+      const name = document.getElementById("tg-name").value.trim();
+      const email = document.getElementById("tg-email").value.trim();
+      const subj = document.getElementById("telegraph-subject").value;
+      const body = document.getElementById("tg-body").value.trim();
+
+      document.getElementById("telegraph-form").classList.add("hidden");
+      document.getElementById("telegraph-receipt").classList.remove("hidden");
+      document.getElementById("receipt-details").textContent =
+        `From ${name} (${email}) • Subject: "${subj}". Ready for direct dispatch to gangwaransh069@gmail.com.`;
+
+      const mailHref = `mailto:gangwaransh069@gmail.com?subject=${encodeURIComponent(`[Portfolio] ${subj} — ${name}`)}&body=${encodeURIComponent(body)}`;
+      document.getElementById("mailto-launch-btn").href = mailHref;
+      showToast("Telegraph stamped & logged!");
+    });
+
+    function resetTelegraph() {
+      document.getElementById("telegraph-form").reset();
+      document.getElementById("telegraph-receipt").classList.add("hidden");
+      document.getElementById("telegraph-form").classList.remove("hidden");
+    }
+
+    /* -------------------- 14. 3D TILT & AMBIENT DUST MOTE CANVAS -------------------- */
+    function attachTiltPhysics() {
+      document.querySelectorAll(".tilt-card").forEach(card => {
+        card.onmousemove = (e) => {
+          const r = card.getBoundingClientRect();
+          const rx = (((e.clientY - r.top) - r.height / 2) / (r.height / 2)) * -4.5;
+          const ry = (((e.clientX - r.left) - r.width / 2) / (r.width / 2)) * 4.5;
+          card.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+        };
+        card.onmouseleave = () => {
+          card.style.transform = "perspective(900px) rotateX(0deg) rotateY(0deg)";
+        };
+      });
+    }
+
+    const canvas = document.getElementById("ambient-canvas");
+    const ctx = canvas.getContext("2d");
+    let motes = [];
+
+    function resizeAmbientCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      motes = [];
+      const count = Math.min(55, Math.floor((canvas.width * canvas.height) / 22000));
+      for (let i = 0; i < count; i++) {
+        motes.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          vx: (Math.random() - 0.5) * 0.4,
+          vy: (Math.random() - 0.5) * 0.4,
+          r: Math.random() * 1.8 + 0.7
+        });
+      }
+    }
+
+    function drawAmbientMotes() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const isParchment = document.documentElement.classList.contains("parchment-mode");
+      const dotColor = isParchment ? "rgba(140, 83, 25, 0.35)" : "rgba(212, 163, 89, 0.35)";
+      const lineColor = isParchment ? "rgba(140, 83, 25, 0.1)" : "rgba(212, 163, 89, 0.1)";
+
+      for (let i = 0; i < motes.length; i++) {
+        const m = motes[i];
+        m.x += m.vx;
+        m.y += m.vy;
+        if (m.x < 0 || m.x > canvas.width) m.vx *= -1;
+        if (m.y < 0 || m.y > canvas.height) m.vy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(m.x, m.y, m.r, 0, Math.PI * 2);
+        ctx.fillStyle = dotColor;
+        ctx.fill();
+
+        for (let j = i + 1; j < motes.length; j++) {
+          const m2 = motes[j];
+          const d = Math.hypot(m.x - m2.x, m.y - m2.y);
+          if (d < 115) {
+            ctx.beginPath();
+            ctx.strokeStyle = lineColor;
+            ctx.lineWidth = 0.8;
+            ctx.moveTo(m.x, m.y);
+            ctx.lineTo(m2.x, m2.y);
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(drawAmbientMotes);
+    }
+
+    window.addEventListener("resize", resizeAmbientCanvas);
+
+    /* -------------------- 15. INITIALIZE ON LOAD -------------------- */
+    window.onload = function () {
+      resizeAmbientCanvas();
+      drawAmbientMotes();
+      runHeroTypewriter();
+      renderDeckCard();
+      renderSkillsIndex();
+      renderWorkshop("all");
+      buildReflexGrid();
+      animateVaultNeedle();
+      attachTiltPhysics();
+    };
+  </script>
+</body>
+</html>
