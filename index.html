@@ -131,26 +131,124 @@
       transform: translateY(1px) scale(0.98);
     }
 
-    /* Refined archival monogram seal */
+    /* Compact AG monogram: clean, legible, and stable on narrow screens. */
     .brand-seal {
       position: relative;
-      isolation: isolate;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
       overflow: hidden;
-      border-radius: 14px 14px 17px 14px;
-      background: radial-gradient(circle at 28% 22%, #e36a62 0%, #a72c31 34%, #64171d 76%, #300d12 100%);
-      border: 1px solid rgba(255, 220, 190, .55);
-      box-shadow: 0 5px 16px rgba(0,0,0,.48), inset 0 1px 2px rgba(255,255,255,.38), inset 0 -5px 10px rgba(20,0,0,.42);
-      outline: 1px solid rgba(212,163,89,.42);
-      outline-offset: 3px;
-      transform: rotate(-3deg);
+      border-radius: 12px;
+      background: linear-gradient(145deg, #642329 0%, #351216 100%);
+      border: 1px solid rgba(212, 163, 89, .72);
+      box-shadow: 0 4px 12px rgba(0,0,0,.32), inset 0 1px 0 rgba(255,255,255,.13);
+      transform: none;
     }
     .brand-seal::before {
-      content: ""; position: absolute; inset: 4px; border: 1px solid rgba(255,225,190,.42);
-      border-radius: 10px 10px 13px 10px; pointer-events: none;
+      content: "";
+      position: absolute;
+      inset: 4px;
+      border: 1px solid rgba(243,234,216,.25);
+      border-radius: 8px;
+      pointer-events: none;
     }
     .brand-seal::after {
-      content: ""; position: absolute; width: 70%; height: 70%; left: 15%; top: -34%;
-      border-radius: 50%; background: rgba(255,255,255,.16); filter: blur(8px); pointer-events: none;
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(145deg, rgba(255,255,255,.12), transparent 48%);
+      pointer-events: none;
+    }
+    .site-header-inner { min-height: 4rem; }
+    @media (min-width: 640px) { .site-header-inner { min-height: 5rem; } }
+    .site-brand { min-width: 0; flex: 1 1 auto; gap: .65rem; }
+    .brand-copy { min-width: 0; }
+    .brand-name { white-space: nowrap; line-height: 1; font-size: clamp(.74rem, 3.2vw, 1.08rem); }
+    .brand-subtitle { white-space: nowrap; font-size: 8px; letter-spacing: .16em; }
+    .header-actions { flex: 0 0 auto; gap: .4rem; }
+    .header-actions button { min-height: 2.5rem; justify-content: center; }
+    @media (max-width: 380px) {
+      .site-brand { gap: .5rem; }
+      .brand-seal { width: 2.25rem !important; height: 2.25rem !important; }
+      .brand-name { font-size: .7rem; }
+      .brand-subtitle { font-size: 7px; letter-spacing: .11em; }
+      .header-actions { gap: .3rem; }
+      .header-actions button { padding-left: .55rem !important; padding-right: .55rem !important; }
+    }
+
+    /* Inquiry Compass and identity thought experiment. */
+    .inquiry-wheel-wrap {
+      width: min(218px, 58vw);
+      aspect-ratio: 1;
+      position: relative;
+      flex: 0 0 auto;
+      display: grid;
+      place-items: center;
+      margin-inline: auto;
+    }
+    .inquiry-wheel {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 1px solid var(--border-strong);
+      background: conic-gradient(
+        from -30deg,
+        rgba(212,163,89,.28) 0deg 58deg,
+        rgba(20,17,14,.82) 60deg 118deg,
+        rgba(212,163,89,.22) 120deg 178deg,
+        rgba(20,17,14,.82) 180deg 238deg,
+        rgba(212,163,89,.22) 240deg 298deg,
+        rgba(20,17,14,.82) 300deg 358deg
+      );
+      box-shadow: 0 0 0 7px rgba(212,163,89,.055), inset 0 0 24px rgba(0,0,0,.55), 0 12px 32px rgba(0,0,0,.3);
+      transition: transform 3.6s cubic-bezier(.12,.78,.12,1);
+      will-change: transform;
+    }
+    .inquiry-wheel::before, .inquiry-wheel::after {
+      content: ""; position: absolute; border-radius: 50%; pointer-events: none;
+    }
+    .inquiry-wheel::before { inset: 12px; border: 1px solid rgba(243,234,216,.32); }
+    .inquiry-wheel::after { inset: 27px; border: 1px dashed rgba(212,163,89,.35); }
+    .wheel-glyph {
+      position: absolute;
+      width: 30px; height: 30px;
+      display: grid; place-items: center;
+      border-radius: 50%;
+      color: #f3ead8;
+      background: rgba(15,12,10,.74);
+      border: 1px solid rgba(212,163,89,.5);
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.35);
+    }
+    .wheel-glyph.g1 { top: 8%; left: calc(50% - 15px); }
+    .wheel-glyph.g2 { top: 25%; right: 9%; }
+    .wheel-glyph.g3 { bottom: 25%; right: 9%; }
+    .wheel-glyph.g4 { bottom: 8%; left: calc(50% - 15px); }
+    .wheel-glyph.g5 { bottom: 25%; left: 9%; }
+    .wheel-glyph.g6 { top: 25%; left: 9%; }
+    .wheel-center {
+      position: absolute; inset: 50% auto auto 50%; z-index: 2;
+      width: 64px; height: 64px; transform: translate(-50%,-50%);
+      display: grid; place-items: center; border-radius: 50%;
+      color: #21180f; background: linear-gradient(145deg,var(--accent-brass),var(--accent-amber));
+      border: 3px solid rgba(20,16,12,.85);
+      box-shadow: 0 0 0 2px rgba(243,234,216,.28), 0 0 24px var(--glow-color);
+      font: 700 24px 'Playfair Display', Georgia, serif;
+    }
+    .wheel-pointer {
+      position: absolute; z-index: 3; top: -5px; left: 50%; transform: translateX(-50%);
+      width: 0; height: 0;
+      border-left: 10px solid transparent; border-right: 10px solid transparent;
+      border-top: 19px solid var(--accent-brass);
+      filter: drop-shadow(0 2px 3px rgba(0,0,0,.5));
+    }
+    .instrument-label { color: var(--accent-brass); font: 10px 'JetBrains Mono', monospace; letter-spacing: .18em; text-transform: uppercase; }
+    .identity-range { width: 100%; accent-color: var(--accent-brass); cursor: pointer; }
+    .identity-track-labels { display: flex; justify-content: space-between; gap: 1rem; color: var(--text-secondary); font: 10px 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: .08em; }
+    @media (prefers-reduced-motion: reduce) {
+      .inquiry-wheel { transition: none; }
     }
 
     /* Crimson Wax Seal Badge */
@@ -325,21 +423,16 @@
 
   <!-- ==================== 1. VINTAGE BRASS & ANALOG NAVIGATION ==================== -->
   <header class="sticky top-0 z-40 border-b backdrop-blur-xl transition-colors" style="border-color: var(--border-brass); background: var(--bg-surface);">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-3">
+    <div class="site-header-inner max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 flex items-center justify-between gap-2">
       
       <!-- Brand Monogram -->
-      <a href="#top" onclick="playClickSound()" class="flex items-center gap-3 group">
-        <div class="brand-seal w-11 h-11 sm:w-12 sm:h-12 flex items-center justify-center shrink-0" aria-label="Ansh Gangwar monogram">
-          <span class="relative z-10 font-serif font-extrabold text-amber-50 text-lg sm:text-xl tracking-tight drop-shadow-[0_2px_2px_rgba(0,0,0,.65)]">AG</span>
-          <span class="absolute bottom-1 left-0 right-0 text-center font-mono text-[5px] tracking-[.22em] text-amber-100/70">ARCHIVE</span>
+      <a href="#top" onclick="playClickSound()" class="site-brand flex items-center group">
+        <div class="brand-seal w-10 h-10 sm:w-11 sm:h-11" aria-label="Ansh Gangwar monogram">
+          <span class="relative z-10 font-serif font-bold text-amber-50 text-base sm:text-lg tracking-tight">AG</span>
         </div>
-        <div>
-          <div class="font-serif font-bold text-base sm:text-lg tracking-wide leading-none" style="color: var(--text-primary);">
-            ANSH GANGWAR
-          </div>
-          <div class="font-mono text-[10px] tracking-[0.22em] uppercase mt-1" style="color: var(--accent-brass);">
-            EST. BAREILLY • ARCHIVE
-          </div>
+        <div class="brand-copy">
+          <div class="brand-name font-serif font-bold tracking-wide" style="color: var(--text-primary);">ANSH GANGWAR</div>
+          <div class="brand-subtitle font-mono uppercase mt-1" style="color: var(--accent-brass);">BAREILLY • ARCHIVE</div>
         </div>
       </a>
 
@@ -352,16 +445,16 @@
       </nav>
 
       <!-- Tactile Controls: Mechanical Audio Toggle, Paper/Dark Switch, Mobile Menu -->
-      <div class="flex items-center gap-2 sm:gap-2.5">
+      <div class="header-actions flex items-center">
         <!-- Mechanical Typewriter Sound Toggle -->
-        <button id="audio-toggle-btn" onclick="toggleSoundEngine()" class="px-3 py-2 rounded-xl vintage-card font-mono text-xs flex items-center gap-1.5 cursor-pointer" title="Toggle Mechanical Typewriter Audio">
+        <button id="audio-toggle-btn" onclick="toggleSoundEngine()" class="px-2.5 py-2 rounded-xl vintage-card font-mono text-xs flex items-center gap-1.5 cursor-pointer" title="Toggle Mechanical Typewriter Audio">
           <span id="audio-dot" class="w-2 h-2 rounded-full bg-stone-500"></span>
           <span id="audio-label" class="hidden sm:inline">SFX: OFF</span>
           <span class="sm:hidden">SFX</span>
         </button>
 
         <!-- Vintage Paper vs Dark Study Toggle -->
-        <button id="paper-toggle-btn" onclick="toggleParchmentMode()" class="px-3 py-2 rounded-xl vintage-card font-mono text-xs flex items-center gap-1.5 cursor-pointer" title="Switch Between Dark Study & Aged Parchment">
+        <button id="paper-toggle-btn" onclick="toggleParchmentMode()" class="px-2.5 py-2 rounded-xl vintage-card font-mono text-xs flex items-center gap-1.5 cursor-pointer" title="Switch Between Dark Study & Aged Parchment">
           <span id="theme-icon">📜</span>
           <span id="theme-label" class="hidden sm:inline">Parchment</span>
         </button>
@@ -689,6 +782,58 @@
         </div>
         <div class="absolute -right-8 -bottom-12 w-40 h-40 rounded-full border opacity-10 pointer-events-none" style="border-color: var(--accent-brass);"></div>
       </div>
+
+      <!-- Interactive instruments: a chance mechanism and a classic identity puzzle. -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
+        <article class="vintage-card rounded-3xl p-6 sm:p-7 overflow-hidden">
+          <div class="flex items-start justify-between gap-4 mb-5">
+            <div>
+              <span class="instrument-label">Instrument 01 // Random inquiry</span>
+              <h3 class="font-serif font-bold text-2xl sm:text-3xl mt-1">The Inquiry Compass</h3>
+              <p class="text-sm mt-2" style="color:var(--text-secondary);">Spin the wheel. Let chance choose the question; let reason do the work.</p>
+            </div>
+            <span class="font-serif text-3xl" style="color:var(--accent-brass);" aria-hidden="true">✳</span>
+          </div>
+          <div class="flex flex-col sm:flex-row items-center gap-6 sm:gap-7">
+            <div class="inquiry-wheel-wrap" aria-label="Six-part rotating philosophy wheel">
+              <div class="wheel-pointer" aria-hidden="true"></div>
+              <div class="inquiry-wheel" id="inquiry-wheel" aria-hidden="true">
+                <span class="wheel-glyph g1">E</span>
+                <span class="wheel-glyph g2">⚖</span>
+                <span class="wheel-glyph g3">∞</span>
+                <span class="wheel-glyph g4">↗</span>
+                <span class="wheel-glyph g5">◈</span>
+                <span class="wheel-glyph g6">⌛</span>
+                <span class="wheel-center">?</span>
+              </div>
+            </div>
+            <div class="flex-1 w-full min-w-0">
+              <p class="instrument-label" id="compass-category" aria-live="polite">Awaiting a direction</p>
+              <h4 class="font-serif font-bold text-xl mt-2" id="compass-title">Curiosity has no preset route.</h4>
+              <p class="text-sm leading-relaxed mt-2 min-h-[76px]" id="compass-prompt" style="color:var(--text-secondary);">Spin the compass to receive a prompt about evidence, ethics, meaning, freedom, identity, or mortality.</p>
+              <button id="compass-spin-btn" onclick="spinInquiryWheel()" class="brass-btn rounded-xl px-5 py-3 mt-4 font-mono text-xs uppercase tracking-wider cursor-pointer">Spin the compass ↻</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="vintage-card rounded-3xl p-6 sm:p-7 overflow-hidden">
+          <span class="instrument-label">Instrument 02 // Identity problem</span>
+          <h3 class="font-serif font-bold text-2xl sm:text-3xl mt-1">The Ship of Theseus</h3>
+          <p class="text-sm leading-relaxed mt-3" style="color:var(--text-secondary);">Imagine a ship repaired one plank at a time. Move the scale as its original parts are replaced. At what point, if any, does it become a different ship?</p>
+          <div class="mt-6 p-4 rounded-2xl border" style="border-color:var(--border-brass);background:rgba(0,0,0,.14);">
+            <div class="flex items-center justify-between gap-3 mb-3">
+              <label for="identity-slider" class="font-mono text-xs uppercase tracking-wider" style="color:var(--text-secondary);">Original parts replaced</label>
+              <output id="identity-percent" for="identity-slider" class="font-mono font-bold text-lg" style="color:var(--accent-brass);">0%</output>
+            </div>
+            <input id="identity-slider" class="identity-range" type="range" min="0" max="100" step="1" value="0" oninput="updateIdentityThought(this.value)" aria-describedby="identity-thought" />
+            <div class="identity-track-labels mt-2"><span>All original</span><span>All replaced</span></div>
+          </div>
+          <div class="mt-4 min-h-[86px]">
+            <p id="identity-thought" class="text-sm leading-relaxed" aria-live="polite">Every original plank remains. Most people would call it the same ship—but what makes it the same: its material, its history, or its continuity?</p>
+          </div>
+          <button onclick="resetIdentityThought()" class="vintage-card rounded-xl px-4 py-2.5 mt-2 font-mono text-xs cursor-pointer">Reset experiment ↺</button>
+        </article>
+      </div>
     </section>
 
     <!-- ==================== 4. ABOUT DOSSIER & TACTILE SKILL INDEX ==================== -->
@@ -758,7 +903,7 @@
         </div>
 
         <div class="flex flex-wrap gap-2">
-          <button onclick="filterWorkshop('all')" data-wcat="all" class="wcat-btn brass-btn px-4 py-2 rounded-xl font-mono text-xs cursor-pointer">All Builds (16)</button>
+          <button onclick="filterWorkshop('all')" data-wcat="all" class="wcat-btn brass-btn px-4 py-2 rounded-xl font-mono text-xs cursor-pointer">All Builds</button>
           <button onclick="filterWorkshop('web')" data-wcat="web" class="wcat-btn vintage-card px-4 py-2 rounded-xl font-mono text-xs cursor-pointer">Web Systems</button>
           <button onclick="filterWorkshop('philosophy')" data-wcat="philosophy" class="wcat-btn vintage-card px-4 py-2 rounded-xl font-mono text-xs cursor-pointer">Mind &amp; Tools</button>
         </div>
@@ -1543,6 +1688,75 @@
       document.getElementById("thought-followup").classList.add("hidden");
       document.getElementById("thought-reveal-btn").textContent = "Unpack the idea";
       playClickSound(420);
+    }
+
+    /* -------------------- INQUIRY COMPASS: SPIN FOR A THINKING LENS -------------------- */
+    const inquiryLenses = [
+      { name: "Evidence", title: "What would convince you?", prompt: "Separate what you have observed from what you have assumed. What reliable evidence could support the claim—and what evidence could weaken it?" },
+      { name: "Ethics", title: "Who is affected by the choice?", prompt: "Look beyond intention. Who benefits, who carries the cost, and would the same rule feel fair if your position were reversed?" },
+      { name: "Meaning", title: "Where does meaning come from?", prompt: "Does meaning need to be discovered, or can people create it through relationships, curiosity, craft, and the choices they make?" },
+      { name: "Freedom", title: "What is actually within your control?", prompt: "Distinguish what you can influence from what you cannot. Which useful action remains available once the noise is removed?" },
+      { name: "Identity", title: "What makes you still you?", prompt: "Your memories, habits, values, and body all change. Which parts matter most when you decide whether a person remains the same person?" },
+      { name: "Mortality", title: "What deserves your limited time?", prompt: "Finitude can clarify priorities. Which activity would still matter to you if applause, status, and permanence were removed?" }
+    ];
+    let inquiryRotation = 0;
+    let inquirySpinTimer = null;
+
+    function spinInquiryWheel() {
+      const wheel = document.getElementById("inquiry-wheel");
+      const button = document.getElementById("compass-spin-btn");
+      if (!wheel || !button || button.disabled) return;
+      const choice = inquiryLenses[Math.floor(Math.random() * inquiryLenses.length)];
+      const reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      inquiryRotation += 1800 + Math.floor(Math.random() * 720);
+      wheel.style.transform = `rotate(${inquiryRotation}deg)`;
+      button.disabled = true;
+      button.textContent = "Reading the compass…";
+      document.getElementById("compass-category").textContent = "The wheel is turning";
+      document.getElementById("compass-title").textContent = "A new lens is on its way.";
+      document.getElementById("compass-prompt").textContent = "Give the wheel a moment to settle.";
+      playClickSound(420);
+      if (inquirySpinTimer) clearTimeout(inquirySpinTimer);
+      inquirySpinTimer = setTimeout(() => {
+        document.getElementById("compass-category").textContent = `Selected lens // ${choice.name}`;
+        document.getElementById("compass-title").textContent = choice.title;
+        document.getElementById("compass-prompt").textContent = choice.prompt;
+        button.disabled = false;
+        button.textContent = "Spin again ↻";
+        showToast(`Inquiry lens: ${choice.name}`);
+      }, reduceMotion ? 30 : 3700);
+    }
+
+    /* -------------------- SHIP OF THESEUS: LIVE IDENTITY THOUGHT EXPERIMENT -------------------- */
+    function updateIdentityThought(value) {
+      const percent = Math.max(0, Math.min(100, Number(value) || 0));
+      const output = document.getElementById("identity-percent");
+      const thought = document.getElementById("identity-thought");
+      if (!output || !thought) return;
+      output.textContent = `${percent}%`;
+      let message;
+      if (percent === 0) {
+        message = "Every original plank remains. Most people would call it the same ship—but what makes it the same: its material, its history, or its continuity?";
+      } else if (percent < 25) {
+        message = "Only a few planks have changed. The ship looks and functions as before. Is continuity doing the work here, or is the original material still important?";
+      } else if (percent < 50) {
+        message = "A growing part of the ship is new. There may be no single moment when its identity changes. Could identity be gradual rather than an on/off switch?";
+      } else if (percent < 75) {
+        message = "More original material has been replaced than remains. Would you still call it the same ship because its story and structure continued?";
+      } else if (percent < 100) {
+        message = "Almost every plank is new. If the ship's history is continuous, does that matter more than the material it is made from?";
+      } else {
+        message = "Every original plank has been replaced. Is it still the same ship? Now imagine rebuilding a second ship from all the discarded original planks—which one has the stronger claim?";
+      }
+      thought.textContent = message;
+    }
+
+    function resetIdentityThought() {
+      const slider = document.getElementById("identity-slider");
+      if (!slider) return;
+      slider.value = 0;
+      updateIdentityThought(0);
+      playClickSound(330);
     }
 
     /* -------------------- 15. 3D TILT & AMBIENT DUST MOTE CANVAS -------------------- */
